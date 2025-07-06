@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SKILWELL Class Registration</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef6ff;
+      padding: 40px;
+    }
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 420px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: navy;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: navy;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .logo {
+      display: block;
+      margin: 0 auto 15px;
+      max-width: 150px;
+    }
+    .thank-you {
+      display: none;
+      text-align: center;
+      font-size: 20px;
+      color: green;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="registerForm">
+    <img src="https://i.ibb.co/YbgR2kh/skilwell-demo.png" alt="SKILWELL Logo" class="logo">
+    <h2>Register for Class</h2>
+
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email Address" required>
+    <input type="tel" name="phone" placeholder="Phone Number" required>
+
+    <select name="course" required>
+      <option value="">Select Course</option>
+      <option value="Python">Python</option>
+      <option value="Excel">Excel</option>
+      <option value="Power BI">Power BI</option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Hidden thank you message -->
+  <div class="thank-you" id="thankYouMessage">
+    ✅ Thank you for your registration!
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = this;
+      const formData = new FormData(form);
+
+      fetch("https://script.google.com/macros/s/AKfycbw4VXo9PIbLzT4cIKvRY5zx8Cc7YKek5J8dgz-7tTxE6R9HSaAJzfJ1CUVxkjp3HUKg/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        form.style.display = "none"; // Hide the form
+        document.getElementById("thankYouMessage").style.display = "block"; // Show thank you
+      })
+      .catch(err => {
+        alert("❌ Something went wrong. Please try again.");
+        console.error("Error:", err);
+      });
+    });
+  </script>
+
+</body>
+</html>
